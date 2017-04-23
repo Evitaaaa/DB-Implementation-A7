@@ -10,6 +10,9 @@
 using namespace std;
 class ExprTree;
 typedef shared_ptr <ExprTree> ExprTreePtr;
+enum MyDB_ExprType {boolExpr, doubleExpr, intExpr, stringExpr, identifierExpr, minusExpr,
+					plusExpr, timesExpr, divideExpr, gtExpr, ltExpr, neqExpr, orExpr, eqExpr
+					notExpr, sumExpr, avgExpr};
 
 // this class encapsules a parsed SQL expression (such as "this.that > 34.5 AND 4 = 5")
 
@@ -37,6 +40,10 @@ public:
 		} else {
 			return "bool[false]";
 		}
+	}
+	
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::boolExpr;
 	}	
 };
 
@@ -52,7 +59,11 @@ public:
 
 	string toString () {
 		return "double[" + to_string (myVal) + "]";
-	}	
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::doubleExpr;
+	}		
 
 	~DoubleLiteral () {}
 };
@@ -70,6 +81,10 @@ public:
 
 	string toString () {
 		return "int[" + to_string (myVal) + "]";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::intExpr;
 	}
 
 	~IntLiteral () {}
@@ -90,6 +105,10 @@ public:
 		return "string[" + myVal + "]";
 	}
 
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::stringExpr;
+	}
+
 	~StringLiteral () {}
 };
 
@@ -107,6 +126,10 @@ public:
 
 	string toString () {
 		return "[" + tableName + "_" + attName + "]";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::identifierExpr;
 	}	
 
 	~Identifier () {}
@@ -128,6 +151,10 @@ public:
 
 	string toString () {
 		return "- (" + lhs->toString () + ", " + rhs->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::minusExpr;
 	}	
 
 	~MinusOp () {}
@@ -149,6 +176,10 @@ public:
 
 	string toString () {
 		return "+ (" + lhs->toString () + ", " + rhs->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::plusExpr;
 	}	
 
 	~PlusOp () {}
@@ -170,6 +201,10 @@ public:
 
 	string toString () {
 		return "* (" + lhs->toString () + ", " + rhs->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::timesExpr;
 	}	
 
 	~TimesOp () {}
@@ -191,6 +226,10 @@ public:
 
 	string toString () {
 		return "/ (" + lhs->toString () + ", " + rhs->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::divideExpr;
 	}	
 
 	~DivideOp () {}
@@ -212,6 +251,10 @@ public:
 
 	string toString () {
 		return "> (" + lhs->toString () + ", " + rhs->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::gtExpr;
 	}	
 
 	~GtOp () {}
@@ -233,6 +276,10 @@ public:
 
 	string toString () {
 		return "< (" + lhs->toString () + ", " + rhs->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::ltExpr;
 	}	
 
 	~LtOp () {}
@@ -254,6 +301,10 @@ public:
 
 	string toString () {
 		return "!= (" + lhs->toString () + ", " + rhs->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::neqExpr;
 	}	
 
 	~NeqOp () {}
@@ -275,6 +326,10 @@ public:
 
 	string toString () {
 		return "|| (" + lhs->toString () + ", " + rhs->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::orExpr;
 	}	
 
 	~OrOp () {}
@@ -296,6 +351,10 @@ public:
 
 	string toString () {
 		return "== (" + lhs->toString () + ", " + rhs->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::eqExpr;
 	}	
 
 	~EqOp () {}
@@ -315,6 +374,10 @@ public:
 
 	string toString () {
 		return "!(" + child->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::notExpr;
 	}	
 
 	~NotOp () {}
@@ -334,6 +397,10 @@ public:
 
 	string toString () {
 		return "sum(" + child->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::sumExpr;
 	}	
 
 	~SumOp () {}
@@ -353,6 +420,10 @@ public:
 
 	string toString () {
 		return "avg(" + child->toString () + ")";
+	}
+
+	MyDB_ExprType getType() {
+		return MyDB_ExprType::avgExpr;
 	}	
 
 	~AvgOp () {}
