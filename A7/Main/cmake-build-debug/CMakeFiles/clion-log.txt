@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug

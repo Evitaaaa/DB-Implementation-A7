@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Main"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Main">
+				<Option output="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Main" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Qunit/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Record/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQL/headers"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 Main"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Main/fast">
+				<Option output="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Main" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Qunit/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Record/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/headers"/>
+					<Add directory="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQL/headers"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 Main/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/Evita/Desktop/Evita/subjects/COMP530\ Database\ Impl/codes/DB/A7/A7/A7/Main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BPlusTest/source/BPlusQUnit.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/headers/CheckLRU.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/headers/MyDB_BufferManager.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/headers/MyDB_Page.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/headers/MyDB_PageHandle.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/headers/PageCompare.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/headers/TableCompare.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/source/MyDB_BufferManager.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferMgr/source/MyDB_Page.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/BufferTest/source/BufferQUnit.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/headers/MyDB_AttType.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/headers/MyDB_Catalog.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/headers/MyDB_PageType.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/headers/MyDB_Schema.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/headers/MyDB_Table.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/source/MyDB_Catalog.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/source/MyDB_Schema.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Catalog/source/MyDB_Table.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/IteratorComparator.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_BPlusTreeReaderWriter.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_PageListIteratorAlt.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_PageListIteratorSelfSortingAlt.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_PageReaderWriter.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_PageRecIterator.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_PageRecIteratorAlt.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_RecordIterator.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_RecordIteratorAlt.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_RunQueueIteratorAlt.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_TableReaderWriter.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_TableRecIterator.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/MyDB_TableRecIteratorAlt.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/RecordComparator.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/headers/Sorting.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/MyDB_BPlusTreeReaderWriter.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/MyDB_PageListIteratorAlt.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/MyDB_PageReaderWriter.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/MyDB_PageRecIterator.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/MyDB_PageRecIteratorAlt.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/MyDB_RunQueueIteratorAlt.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/MyDB_TableReaderWriter.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/MyDB_TableRecIterator.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/MyDB_TableRecIteratorAlt.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/DatabaseTable/source/Sorting.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Qunit/headers/QUnit.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Record/headers/MyDB_AttVal.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Record/headers/MyDB_INRecord.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Record/headers/MyDB_Record.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Record/source/MyDB_AttVal.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/Record/source/MyDB_Record.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RecordTest/source/RecordQUnit.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOpTest/source/RelOpQUnit.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/headers/Aggregate.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/headers/BPlusSelection.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/headers/RegularSelection.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/headers/ScanJoin.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/headers/SortMergeJoin.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/source/Aggregate.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/source/BPlusSelection.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/source/RegularSelection.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/source/ScanJoin.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/RelOps/source/SortMergeJoin.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQL/headers/ExprTree.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQL/headers/FriendDecls.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQL/headers/Lexer.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQL/headers/Parser.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQL/headers/ParserHelperFunctions.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQL/headers/ParserTypes.h">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQL/source/ParserHelperFunctions.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SQLTest/source/main.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/SortTest/source/SortQUnit.cc">
+			<Option target="Main"/>
+		</Unit>
+		<Unit filename="/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/DB/A7/A7/A7/Main/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
