@@ -1,2 +1,8 @@
 
 *.tbl
+
+A7/Build/.sconsign.dblite
+
+A7/Build/bin/sqlUnitTest
+
+*.o

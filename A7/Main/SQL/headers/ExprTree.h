@@ -11,7 +11,7 @@ using namespace std;
 class ExprTree;
 typedef shared_ptr <ExprTree> ExprTreePtr;
 enum MyDB_ExprType {boolExpr, doubleExpr, intExpr, stringExpr, identifierExpr, minusExpr,
-					plusExpr, timesExpr, divideExpr, gtExpr, ltExpr, neqExpr, orExpr, eqExpr
+					plusExpr, timesExpr, divideExpr, gtExpr, ltExpr, neqExpr, orExpr, eqExpr,
 					notExpr, sumExpr, avgExpr};
 
 // this class encapsules a parsed SQL expression (such as "this.that > 34.5 AND 4 = 5")
