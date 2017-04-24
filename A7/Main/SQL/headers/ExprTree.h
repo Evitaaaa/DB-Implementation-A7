@@ -3,6 +3,7 @@
 #define SQL_EXPRESSIONS
 
 #include "MyDB_AttType.h"
+#include "MyDB_Catalog.h"
 #include <string>
 #include <vector>
 
@@ -21,6 +22,7 @@ class ExprTree {
 
 public:
 	virtual string toString () = 0;
+	virtual pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName) = 0;
 	virtual ~ExprTree () {}
 };
 
@@ -44,7 +46,12 @@ public:
 	
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::boolExpr;
-	}	
+	}
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
 };
 
 class DoubleLiteral : public ExprTree {
@@ -64,6 +71,10 @@ public:
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::doubleExpr;
 	}		
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
 
 	~DoubleLiteral () {}
 };
@@ -85,6 +96,10 @@ public:
 
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::intExpr;
+	}
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
 	}
 
 	~IntLiteral () {}
@@ -109,6 +124,10 @@ public:
 		return MyDB_ExprType::stringExpr;
 	}
 
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
 	~StringLiteral () {}
 };
 
@@ -125,12 +144,34 @@ public:
 	}
 
 	string toString () {
-		return "[" + tableName + "_" + attName + "]";
+		return "[" + attName + "]";
 	}
 
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::identifierExpr;
 	}	
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName) override {
+		string type;
+        string attr_name = tbName + "." + attName + ".type";
+		
+		MyDB_AttTypePtr attType;
+		if(catalog -> getString(attr_name, type)){
+			if(type.compare("bool") == 0){
+				attType = make_shared <MyDB_BoolAttType> ();
+			}
+			else if(type.compare("string") == 0){
+				attType = make_shared <MyDB_StringAttType> ();
+			}
+			else if(type.compare("int") == 0){
+				attType = make_shared <MyDB_IntAttType> ();
+			}
+			else if(type.compare("double") == 0){
+				attType = make_shared <MyDB_DoubleAttType> ();
+			}
+		}
+		return make_pair("[" + attName + "]", attType);
+	}
 
 	~Identifier () {}
 };
@@ -157,6 +198,10 @@ public:
 		return MyDB_ExprType::minusExpr;
 	}	
 
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
 	~MinusOp () {}
 };
 
@@ -181,6 +226,10 @@ public:
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::plusExpr;
 	}	
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
 
 	~PlusOp () {}
 };
@@ -207,6 +256,10 @@ public:
 		return MyDB_ExprType::timesExpr;
 	}	
 
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
 	~TimesOp () {}
 };
 
@@ -231,6 +284,10 @@ public:
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::divideExpr;
 	}	
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
 
 	~DivideOp () {}
 };
@@ -257,6 +314,10 @@ public:
 		return MyDB_ExprType::gtExpr;
 	}	
 
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
 	~GtOp () {}
 };
 
@@ -281,6 +342,10 @@ public:
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::ltExpr;
 	}	
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
 
 	~LtOp () {}
 };
@@ -307,6 +372,10 @@ public:
 		return MyDB_ExprType::neqExpr;
 	}	
 
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
 	~NeqOp () {}
 };
 
@@ -331,6 +400,10 @@ public:
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::orExpr;
 	}	
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
 
 	~OrOp () {}
 };
@@ -357,6 +430,10 @@ public:
 		return MyDB_ExprType::eqExpr;
 	}	
 
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
 	~EqOp () {}
 };
 
@@ -379,6 +456,10 @@ public:
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::notExpr;
 	}	
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
 
 	~NotOp () {}
 };
@@ -403,6 +484,10 @@ public:
 		return MyDB_ExprType::sumExpr;
 	}	
 
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
 	~SumOp () {}
 };
 
@@ -425,6 +510,10 @@ public:
 	MyDB_ExprType getType() {
 		return MyDB_ExprType::avgExpr;
 	}	
+
+	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
 
 	~AvgOp () {}
 };

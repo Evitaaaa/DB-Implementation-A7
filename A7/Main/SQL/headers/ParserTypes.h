@@ -235,6 +235,18 @@ public:
 	
 	~SFWQuery () {}
 
+	vector <pair <string, string>> getTables() {
+		return tablesToProcess;
+	}
+
+	vector <ExprTreePtr> getAllValues() {
+		return valuesToSelect;
+	}
+
+	vector <ExprTreePtr> getAllDisjunctions(){
+		return allDisjunctions;
+	}
+
 	void print () {
 		cout << "Selecting the following:\n";
 		for (auto a : valuesToSelect) {
@@ -289,6 +301,10 @@ public:
 
 	bool isSFWQuery () {
 		return isQuery;
+	}
+
+	SFWQuery getQuery() {
+		return myQuery;
 	}
 
 	string addToCatalog (string storageDir, MyDB_CatalogPtr addToMe) {

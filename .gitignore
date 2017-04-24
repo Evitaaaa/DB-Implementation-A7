@@ -1,8 +1,20 @@
 
-*.tbl
 
 A7/Build/.sconsign.dblite
 
 A7/Build/bin/sqlUnitTest
 
+.DS_Store
+
+A7/Build/customer.tbl
+
+*.zip
+
+*.tbl
+
+
 *.o
+
+*.json
+
+*.bin

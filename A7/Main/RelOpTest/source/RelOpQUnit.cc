@@ -88,12 +88,12 @@ int main () {
 		cout << "\nRunning selection.";
 		cout << "\nFirst result should be:\n";
 		cout << "Supplier#000000003|1|11-383-516-1199 4192.400000 furiously regular instructions impress slyly! carefu|\n\n";
-                MyDB_RecordPtr temp = supplierTableOut->getEmptyRecord ();
-                MyDB_RecordIteratorAltPtr myIter = supplierTableOut->getIteratorAlt ();
+		MyDB_RecordPtr temp = supplierTableOut->getEmptyRecord ();
+		MyDB_RecordIteratorAltPtr myIter = supplierTableOut->getIteratorAlt ();
 
-                while (myIter->advance ()) {
-                        myIter->getCurrent (temp);
-			cout << temp << "\n";
+		while (myIter->advance ()) {
+				myIter->getCurrent (temp);
+				cout << temp << "\n";
 		}
 
 		// now, we count the total number of records 

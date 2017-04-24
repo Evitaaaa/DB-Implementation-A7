@@ -5,6 +5,7 @@
 #include "MyDB_BufferManager.h"
 #include "MyDB_TableReaderWriter.h"
 #include "MyDB_BPlusTreeReaderWriter.h"
+#include "RealOperation.h"
 #include <string>      
 #include <iostream>   
 #include <sstream>
@@ -163,6 +164,8 @@ int main (int numArgs, char **args) {
 
 						// print it out
 						final->printSFWQuery ();
+						RealOperation realOp (final, myCatalog, allTableReaderWriters, myMgr);
+						realOp.run();
 					}
 
 					// get outta here
