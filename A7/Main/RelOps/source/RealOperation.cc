@@ -38,7 +38,7 @@ void RealOperation :: run() {
     vector <pair <MyDB_AggType, string>> aggsToCompute;
     vector <string> groupings;
     for (auto v : valuesToSelect){
-        //cout <<"[RealOperation line 41] " << v->toString() << "\n";
+        cout <<"[RealOperation line 41] " << v->toString() << "\n";
         
         mySchemaOut->appendAtt(v->getAttPair(catalog, fullTableName));
         projections.push_back(v->toString());
@@ -78,7 +78,7 @@ void RealOperation :: run() {
 		vector <string> groupings, string selectionPredicate);
     */
     if(isAgg){
-        //cout << "[RealOperation line 81] do aggregate \n";
+        cout << "[RealOperation line 81] do aggregate \n";
         Aggregate selectionOp (inputTableReaderWriter, outputTableReadWriter, aggsToCompute, groupings, selectPredicate);
         selectionOp.run();
     }
