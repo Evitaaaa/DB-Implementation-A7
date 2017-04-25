@@ -7,6 +7,7 @@
 #include "Aggregate.h"
 #include "RealOperation.h"
 
+
 RealOperation :: RealOperation(SQLStatement *inputSql, MyDB_CatalogPtr inputCatalog, 
         map <string, MyDB_TableReaderWriterPtr> inputTables, MyDB_BufferManagerPtr inputMgr){
             sql = inputSql;
@@ -14,6 +15,42 @@ RealOperation :: RealOperation(SQLStatement *inputSql, MyDB_CatalogPtr inputCata
             allTables = inputTables;
             bufferMgr = inputMgr;
 }
+
+void RealOperation :: joinTwoTable(){
+    SFWQuery query = sql->getQuery();
+    vector <pair <string, string>> tablesToProcess = query.getTables();
+    string leftTbName = tablesToProcess[0].first;
+    string rightTbName = tablesToProcess[1].first;
+    MyDB_TableReaderWriterPtr leftTableReaderWriter = allTables[leftTbName];
+    MyDB_TableReaderWriterPtr rightTableReaderWriter = allTables[rightTbName];
+    leftTableReaderWriter->loadFromTextFile("./"+leftTbName+".tbl");
+    rightTableReaderWriter->loadFromTextFile("./"+rightTbName+".tbl");
+
+    MyDB_SchemaPtr mySchemaOut = make_shared <MyDB_Schema> ();
+    MyDB_SchemaPtr leftSchema = leftTableReaderWriter->getTable()->getSchema();
+    vector <pair <string, MyDB_AttTypePtr>> leftAtts = leftSchema -> getAtts();
+    for (auto p : leftAtts){
+        mySchemaOut->appendAtt(p);
+    }
+    MyDB_SchemaPtr rightSchema = rightTableReaderWriter->getTable()->getSchema();
+    vector <pair <string, MyDB_AttTypePtr>> rightAtts = rightSchema -> getAtts();
+    for (auto p : rightAtts){
+        mySchemaOut->appendAtt(p);
+    }
+
+    MyDB_TablePtr myTableOut = make_shared <MyDB_Table> ("tableOut", "tableOut.bin", mySchemaOut);
+    MyDB_TableReaderWriterPtr outputTableReadWriter = make_shared <MyDB_TableReaderWriter> (myTableOut, bufferMgr);
+
+    vector <ExprTreePtr> valuesToSelect = query.getAllValues();
+    vector <string> projections;
+
+
+
+
+
+
+}
+
 
 void RealOperation :: run() {
     SFWQuery query = sql->getQuery();

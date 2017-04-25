@@ -26,6 +26,7 @@ public:
 	virtual pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName) = 0;
 	virtual MyDB_ExprType getType() = 0;
 	virtual MyDB_ExprAttType getAttType() = 0;
+	virtual pair<bool, string> IsJoinPredicate() = 0;
 	virtual ~ExprTree () {}
 };
 
@@ -59,6 +60,10 @@ public:
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
 	}
 
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
+	}
+
 };
 
 class DoubleLiteral : public ExprTree {
@@ -85,6 +90,10 @@ public:
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
 		return make_pair("", make_shared <MyDB_DoubleAttType> ());
+	}
+
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
 	}
 
 	~DoubleLiteral () {}
@@ -117,6 +126,10 @@ public:
 		return make_pair("", make_shared <MyDB_IntAttType> ());
 	}
 
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
+	}
+
 	~IntLiteral () {}
 };
 
@@ -146,6 +159,10 @@ public:
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
 		cout <<"[ExprTree 147] getAttPair for string \n"; 
 		return make_pair("", make_shared <MyDB_StringAttType> ());
+	}
+
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
 	}
 
 	~StringLiteral () {}
@@ -204,6 +221,10 @@ public:
 		return make_pair("[" + attName + "]", attType);
 	}
 
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, tableName);
+	}
+
 	~Identifier () {}
 };
 
@@ -239,6 +260,10 @@ public:
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
 	}
 
 	~MinusOp () {}
@@ -292,6 +317,10 @@ public:
 		
 	}
 
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
+	}
+
 	~PlusOp () {}
 };
 
@@ -328,6 +357,10 @@ public:
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
 	}
 
 	~TimesOp () {}
@@ -369,6 +402,10 @@ public:
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
 	}
 
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
+	}
+
 	~DivideOp () {}
 };
 
@@ -400,6 +437,18 @@ public:
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
+	pair<bool, string> IsJoinPredicate(){
+		pair<bool, string> left = lhs -> IsJoinPredicate();
+		pair<bool, string> right = rhs -> IsJoinPredicate();
+		
+		if (left.second == right.second || right.second == ""){
+			return make_pair(false, left.second);
+		}
+		else{
+			return make_pair(true, "");
+		}
 	}
 
 	~GtOp () {}
@@ -435,6 +484,17 @@ public:
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
 	}
 
+	pair<bool, string> IsJoinPredicate(){
+		pair<bool, string> left = lhs -> IsJoinPredicate();
+		pair<bool, string> right = rhs -> IsJoinPredicate();
+		if (left.second == right.second || right.second == ""){
+			return make_pair(false, left.second);
+		}
+		else{
+			return make_pair(true, "");
+		}
+	}
+
 	~LtOp () {}
 };
 
@@ -466,6 +526,17 @@ public:
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
+	pair<bool, string> IsJoinPredicate(){
+		pair<bool, string> left = lhs -> IsJoinPredicate();
+		pair<bool, string> right = rhs -> IsJoinPredicate();
+		if (left.second == right.second || right.second == ""){
+			return make_pair(false, left.second);
+		}
+		else{
+			return make_pair(true, "");
+		}
 	}
 
 	~NeqOp () {}
@@ -501,6 +572,10 @@ public:
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
 	}
 
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, lhs->IsJoinPredicate().second);
+	}
+
 	~OrOp () {}
 };
 
@@ -534,6 +609,17 @@ public:
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
 	}
 
+	pair<bool, string> IsJoinPredicate(){
+		pair<bool, string> left = lhs -> IsJoinPredicate();
+		pair<bool, string> right = rhs -> IsJoinPredicate();
+		if (left.second == right.second || right.second == ""){
+			return make_pair(false, left.second);
+		}
+		else{
+			return make_pair(true, "");
+		}
+	}
+
 	~EqOp () {}
 };
 
@@ -563,6 +649,10 @@ public:
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
 		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	}
+
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
 	}
 
 	~NotOp () {}
@@ -596,6 +686,10 @@ public:
 		return make_pair("sum", make_shared <MyDB_DoubleAttType> ());
 	}
 
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
+	}
+
 	~SumOp () {}
 };
 
@@ -627,6 +721,10 @@ public:
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
 		//cout << "[ExprTree line 620] return double \n";
 		return make_pair("avg", make_shared <MyDB_DoubleAttType> ());
+	}
+
+	pair<bool, string> IsJoinPredicate(){
+		return make_pair(false, "");
 	}
 
 	~AvgOp () {}
