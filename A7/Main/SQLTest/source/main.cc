@@ -11,6 +11,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <chrono>
 
 using namespace std;
 string toLower (string data) {
@@ -164,8 +165,11 @@ int main (int numArgs, char **args) {
 
 						// print it out
 						final->printSFWQuery ();
+						auto begin = std::chrono::high_resolution_clock::now();
 						RealOperation realOp (final, myCatalog, allTableReaderWriters, myMgr);
 						realOp.run();
+						auto end = std::chrono::high_resolution_clock::now();
+std::cout << "Duration to do the thing that I wanted to do: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() / 1000000000  << " s." << std::endl;
 					}
 
 					// get outta here

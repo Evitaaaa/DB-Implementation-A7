@@ -593,13 +593,7 @@ public:
 	}	
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		if(getAttType() == MyDB_ExprAttType::doubleAtt){
-			return make_pair("sum", make_shared <MyDB_DoubleAttType> ());
-		}
-		else{
-			return make_pair("sum", make_shared <MyDB_IntAttType> ());
-		}
-		
+		return make_pair("sum", make_shared <MyDB_DoubleAttType> ());
 	}
 
 	~SumOp () {}
@@ -631,15 +625,8 @@ public:
 
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		cout << "[ExprTree line 620] call getAttPair \n";
-		if(getAttType() == MyDB_ExprAttType::doubleAtt){
-			cout << "[ExprTree line 620] return double \n";
-			return make_pair("avg", make_shared <MyDB_DoubleAttType> ());
-		}
-		else{
-			cout << "[ExprTree line 620] return int \n";
-			return make_pair("avg", make_shared <MyDB_IntAttType> ());
-		}
+		//cout << "[ExprTree line 620] return double \n";
+		return make_pair("avg", make_shared <MyDB_DoubleAttType> ());
 	}
 
 	~AvgOp () {}
