@@ -35,11 +35,17 @@ void Aggregate :: run () {
 	MyDB_SchemaPtr aggSchema = make_shared <MyDB_Schema> ();
 	int i = 0;
 	int numGroups = groupings.size ();
+	cout << "set up aggSchema  \n";
+	cout << "groupings size " << numGroups << "\n";
 	for (auto &a : output->getTable ()->getSchema ()->getAtts ()) {
+		cout << i << "\n";
 		if (i < numGroups) 
 			aggSchema->appendAtt (make_pair ("MyDB_GroupAtt" + to_string (i++), a.second));
-		else
+		else{
+			
 			aggSchema->appendAtt (make_pair ("MyDB_AggAtt" + to_string (i++ - numGroups), a.second));
+			cout << "MyDB_AggAtt" <<  to_string (i - numGroups) << " , " << a.second->toString() << "\n";
+		}
 	}
 	aggSchema->appendAtt (make_pair ("MyDB_CntAtt", make_shared <MyDB_IntAttType> ()));
 
@@ -96,18 +102,26 @@ void Aggregate :: run () {
 
 	// this will compute the final aggregate value for each output record
 	vector <func> finalAggComps;
-
+	cout << "build aggComps \n";
 	i = 0;
 	for (auto &s : aggsToCompute) {
-		if (s.first == MyDB_AggType :: sum || s.first == MyDB_AggType :: avg) {
+		cout <<  "i " << i << "\n";
+		if (s.first == MyDB_AggType :: sumAgg || s.first == MyDB_AggType :: avgAgg) {
 			aggComps.push_back (combinedRec->compileComputation ("+ (" + s.second + 
 				", [MyDB_AggAtt" + to_string (i) + "])"));
-		} else if (s.first == MyDB_AggType :: cnt) {
+				cout <<  "[106] \n";
+				cout << "+ (" + s.second + ", [MyDB_AggAtt" + to_string (i) + "])" << "\n";
+
+
+		} else if (s.first == MyDB_AggType :: cntAgg) {
 			aggComps.push_back (combinedRec->compileComputation ("+ ( int[1], [MyDB_AggAtt"
 				+ to_string (i) + "])"));
+				cout <<  "[111] \n";
+				cout << "+ ( int[1], [MyDB_AggAtt" + to_string (i) + "])" << "\n";
+
 		}
 
-		if (s.first == MyDB_AggType :: avg) {
+		if (s.first == MyDB_AggType :: avgAgg) {
 			finalAggComps.push_back (combinedRec->compileComputation ("/ ([MyDB_AggAtt" + to_string (i++) + "], [MyDB_CntAtt])"));
 		} else {
 			finalAggComps.push_back (combinedRec->compileComputation ("[MyDB_AggAtt" + to_string (i++) + "]"));
@@ -121,6 +135,7 @@ void Aggregate :: run () {
 	// at this point, we are ready to go!!
 	MyDB_RecordIteratorPtr myIter = input->getIterator (inputRec);
 	MyDB_AttValPtr zero = make_shared <MyDB_IntAttVal> ();
+	int limit = 10;
 	while (myIter->hasNext ()) {
 
 		myIter->getNext ();
@@ -160,6 +175,7 @@ void Aggregate :: run () {
 			// set up the record...
 			i = 0;
 			for (auto &f : groupingComps) {
+				
 				aggRec->getAtt (i++)->set (f ());
 			}
 			for (int j = 0; j < aggComps.size (); j++) {
@@ -169,8 +185,14 @@ void Aggregate :: run () {
 
 		// update each of the aggregates
 		i = 0;
+		limit--;
+		if(limit > 0){
+			cout << "aggRec " <<  aggRec << "\n";
+		}
 		for (auto &f : aggComps) {
+			//cout << "run f() " << i << "\n";
 			aggRec->getAtt (numGroups + i++)->set (f ());
+			
 		}
 
 		// if we did not find a match, write to a new location...

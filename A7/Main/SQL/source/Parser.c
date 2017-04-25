@@ -120,7 +120,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 2 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 2 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
 
 	#include "Lexer.h"
 	#include "ParserHelperFunctions.h" 
@@ -151,7 +151,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 13 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 13 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
 {
 	struct SQLStatement *myStatement;
 	struct SFWQuery *mySelectQuery;
@@ -166,7 +166,7 @@ typedef union YYSTYPE
 	double myDouble;
 }
 /* Line 193 of yacc.c.  */
-#line 170 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.c"
+#line 170 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -179,7 +179,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 183 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.c"
+#line 183 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.c"
 
 #ifdef short
 # undef short
@@ -1464,7 +1464,7 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 82 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 82 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myStatement) = makeSelectQuery ((yyvsp[(1) - (1)].mySelectQuery));
 	*myStatement = (yyval.myStatement);
@@ -1472,7 +1472,7 @@ yyreduce:
     break;
 
   case 3:
-#line 88 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 88 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myStatement) = makeCreateTable ((yyvsp[(1) - (1)].myCreateTable));
 	*myStatement = (yyval.myStatement);
@@ -1480,273 +1480,273 @@ yyreduce:
     break;
 
   case 4:
-#line 97 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 97 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myCreateTable) = makeTableRegular ((yyvsp[(3) - (6)].myChar), (yyvsp[(5) - (6)].myAttList));	
 ;}
     break;
 
   case 5:
-#line 103 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 103 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myCreateTable) = makeTableBPlusTree ((yyvsp[(3) - (10)].myChar), (yyvsp[(5) - (10)].myAttList), (yyvsp[(10) - (10)].myChar));
 ;}
     break;
 
   case 6:
-#line 108 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 108 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myAttList) = appendAttList ((yyvsp[(1) - (3)].myAttList), (yyvsp[(3) - (3)].myAttList));
 ;}
     break;
 
   case 7:
-#line 113 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 113 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myAttList) = (yyvsp[(1) - (1)].myAttList);
 ;}
     break;
 
   case 8:
-#line 119 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 119 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myAttList) = makeAttList ((yyvsp[(1) - (2)].myChar), INT);
 ;}
     break;
 
   case 9:
-#line 124 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 124 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myAttList) = makeAttList ((yyvsp[(1) - (2)].myChar), DOUBLE);
 ;}
     break;
 
   case 10:
-#line 129 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 129 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myAttList) = makeAttList ((yyvsp[(1) - (2)].myChar), STRING);
 ;}
     break;
 
   case 11:
-#line 134 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 134 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myAttList) = makeAttList ((yyvsp[(1) - (2)].myChar), BOOL);
 ;}
     break;
 
   case 12:
-#line 144 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 144 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.mySelectQuery) = makeQueryWithGroupBy ((yyvsp[(2) - (9)].allValues), (yyvsp[(4) - (9)].myFromList), (yyvsp[(6) - (9)].myCNF), (yyvsp[(9) - (9)].allValues));
 ;}
     break;
 
   case 13:
-#line 151 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 151 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.mySelectQuery) = makeQuery ((yyvsp[(2) - (6)].allValues), (yyvsp[(4) - (6)].myFromList), (yyvsp[(6) - (6)].myCNF));
 ;}
     break;
 
   case 14:
-#line 157 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 157 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.mySelectQuery) = makeQueryNoWhere ((yyvsp[(2) - (4)].allValues), (yyvsp[(4) - (4)].myFromList));
 ;}
     break;
 
   case 15:
-#line 163 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 163 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myFromList) = appendFromList ((yyvsp[(5) - (5)].myFromList), (yyvsp[(1) - (5)].myChar), (yyvsp[(3) - (5)].myChar));
 ;}
     break;
 
   case 16:
-#line 168 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 168 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myFromList) = makeFromList ((yyvsp[(1) - (3)].myChar), (yyvsp[(3) - (3)].myChar));
 ;}
     break;
 
   case 17:
-#line 174 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 174 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myCNF) = pushBackDisjunction ((yyvsp[(1) - (3)].myCNF), (yyvsp[(3) - (3)].myValue));	
 ;}
     break;
 
   case 18:
-#line 179 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 179 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myCNF) = pushBackDisjunction ((yyvsp[(1) - (5)].myCNF), (yyvsp[(4) - (5)].myValue));	
 ;}
     break;
 
   case 19:
-#line 184 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 184 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myCNF) = makeCNF ((yyvsp[(1) - (1)].myValue));
 ;}
     break;
 
   case 20:
-#line 189 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 189 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myCNF) = makeCNF ((yyvsp[(2) - (3)].myValue));
 ;}
     break;
 
   case 21:
-#line 195 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 195 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = orr ((yyvsp[(1) - (3)].myValue), (yyvsp[(3) - (3)].myValue));
 ;}
     break;
 
   case 22:
-#line 200 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 200 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = (yyvsp[(1) - (1)].myValue);
 ;}
     break;
 
   case 23:
-#line 206 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 206 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = gt ((yyvsp[(1) - (3)].myValue), (yyvsp[(3) - (3)].myValue));
 ;}
     break;
 
   case 24:
-#line 211 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 211 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = lt ((yyvsp[(1) - (3)].myValue), (yyvsp[(3) - (3)].myValue));
 ;}
     break;
 
   case 25:
-#line 216 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 216 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
         (yyval.myValue) = neq ((yyvsp[(1) - (4)].myValue), (yyvsp[(4) - (4)].myValue));
 ;}
     break;
 
   case 26:
-#line 221 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 221 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = eq ((yyvsp[(1) - (3)].myValue), (yyvsp[(3) - (3)].myValue));
 ;}
     break;
 
   case 27:
-#line 226 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 226 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = nott ((yyvsp[(2) - (2)].myValue));
 ;}
     break;
 
   case 28:
-#line 232 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 232 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.allValues) = pushBackValue ((yyvsp[(1) - (3)].allValues), (yyvsp[(3) - (3)].myValue));
 ;}
     break;
 
   case 29:
-#line 237 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 237 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.allValues) = makeValueList ((yyvsp[(1) - (1)].myValue));
 ;}
     break;
 
   case 30:
-#line 243 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 243 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = plus ((yyvsp[(1) - (3)].myValue), (yyvsp[(3) - (3)].myValue));
 ;}
     break;
 
   case 31:
-#line 248 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 248 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = minus ((yyvsp[(1) - (3)].myValue), (yyvsp[(3) - (3)].myValue));
 ;}
     break;
 
   case 32:
-#line 253 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 253 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = (yyvsp[(1) - (1)].myValue);
 ;}
     break;
 
   case 33:
-#line 258 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 258 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = sum ((yyvsp[(3) - (4)].myValue));
 ;}
     break;
 
   case 34:
-#line 263 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 263 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = avg ((yyvsp[(3) - (4)].myValue));
 ;}
     break;
 
   case 35:
-#line 269 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 269 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = times ((yyvsp[(1) - (3)].myValue), (yyvsp[(3) - (3)].myValue));
 ;}
     break;
 
   case 36:
-#line 274 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 274 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = divide ((yyvsp[(1) - (3)].myValue), (yyvsp[(3) - (3)].myValue));
 ;}
     break;
 
   case 37:
-#line 279 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 279 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = (yyvsp[(1) - (1)].myValue);
 ;}
     break;
 
   case 38:
-#line 284 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 284 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = makeIdentifier ((yyvsp[(1) - (3)].myChar), (yyvsp[(3) - (3)].myChar));
 ;}
     break;
 
   case 39:
-#line 289 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 289 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = makeDouble ((yyvsp[(1) - (1)].myDouble));
 ;}
     break;
 
   case 40:
-#line 294 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 294 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = makeString ((yyvsp[(1) - (1)].myChar));	
 ;}
     break;
 
   case 41:
-#line 299 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 299 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = makeInt ((yyvsp[(1) - (1)].myInt));
 ;}
     break;
 
   case 42:
-#line 304 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 304 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
     {
 	(yyval.myValue) = (yyvsp[(2) - (3)].myValue);
 ;}
@@ -1754,7 +1754,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1758 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.c"
+#line 1758 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1968,7 +1968,7 @@ yyreturn:
 }
 
 
-#line 309 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 309 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
 
 
 

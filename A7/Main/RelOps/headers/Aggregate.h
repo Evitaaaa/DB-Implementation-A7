@@ -11,7 +11,7 @@
 // need to work when there is not enough space in the buffer manager to store all of
 // the groups.
 
-enum MyDB_AggType {sum, avg, cnt};
+enum MyDB_AggType {sumAgg, avgAgg, cntAgg};
 
 class Aggregate {
 

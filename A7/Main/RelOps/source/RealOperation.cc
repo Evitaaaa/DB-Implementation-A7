@@ -4,7 +4,7 @@
 #include "ExprTree.h"
 #include "MyDB_Record.h"
 #include "RegularSelection.h"
-
+#include "Aggregate.h"
 #include "RealOperation.h"
 
 RealOperation :: RealOperation(SQLStatement *inputSql, MyDB_CatalogPtr inputCatalog, 
@@ -17,22 +17,49 @@ RealOperation :: RealOperation(SQLStatement *inputSql, MyDB_CatalogPtr inputCata
 
 void RealOperation :: run() {
     SFWQuery query = sql->getQuery();
+    // tablesToProcess<tableName, alias>
     vector <pair <string, string>> tablesToProcess = query.getTables();
+    
+    // STEP 1 set input table
+    //TODO should be a vector of tables
+    /*
+
+    */
     string fullTableName = tablesToProcess.front().first;
     MyDB_TableReaderWriterPtr inputTableReaderWriter = allTables[fullTableName];
-    inputTableReaderWriter->loadFromTextFile("../" + fullTableName + ".tbl");
+    inputTableReaderWriter->loadFromTextFile("./" + fullTableName + ".tbl");
     
+    // STEP 2 set output table 
     MyDB_SchemaPtr mySchemaOut = make_shared <MyDB_Schema> ();
     vector <ExprTreePtr> valuesToSelect = query.getAllValues();
     vector <string> projections;
+
+    bool isAgg = false;
+    vector <pair <MyDB_AggType, string>> aggsToCompute;
+    vector <string> groupings;
     for (auto v : valuesToSelect){
         cout << v->toString() << "\n";
         mySchemaOut->appendAtt(v->getAttPair(catalog, fullTableName));
         projections.push_back(v->toString());
+
+        if(v->getType() == MyDB_ExprType::sumExpr){
+            isAgg = true;
+            aggsToCompute.push_back(make_pair(MyDB_AggType::sumAgg, v->toString()));
+        }
+        else if(v->getType() == MyDB_ExprType::avgExpr){
+            isAgg = true;
+            aggsToCompute.push_back(make_pair(MyDB_AggType::avgAgg, v->toString()));
+        }
+        else{
+            groupings.push_back(v->toString());
+        }
     }
     
     MyDB_TablePtr myTableOut = make_shared <MyDB_Table> ("tableOut", "tableOut.bin", mySchemaOut);
     MyDB_TableReaderWriterPtr outputTableReadWriter = make_shared <MyDB_TableReaderWriter> (myTableOut, bufferMgr);
+
+    //aggregate?
+
 
     vector <ExprTreePtr> allDisjunctions = query.getAllDisjunctions();
     vector <string> allPredicates;
@@ -41,8 +68,23 @@ void RealOperation :: run() {
     }
     
     string selectPredicate = parseStringPredicate(allPredicates);
-    RegularSelection selectionOp (inputTableReaderWriter, outputTableReadWriter, selectPredicate, projections);
-    selectionOp.run();
+
+
+    /*
+    aggregate
+    Aggregate (MyDB_TableReaderWriterPtr input, MyDB_TableReaderWriterPtr output,
+		vector <pair <MyDB_AggType, string>> aggsToCompute,
+		vector <string> groupings, string selectionPredicate);
+    */
+    if(isAgg){
+        cout << "do aggregate \n";
+        Aggregate selectionOp (inputTableReaderWriter, outputTableReadWriter, aggsToCompute, groupings, selectPredicate);
+        selectionOp.run();
+    }
+    else{
+        RegularSelection selectionOp (inputTableReaderWriter, outputTableReadWriter, selectPredicate, projections);
+        selectionOp.run();
+    }
 
     MyDB_RecordPtr temp = outputTableReadWriter->getEmptyRecord ();
     MyDB_RecordIteratorAltPtr myIter = outputTableReadWriter->getIteratorAlt ();

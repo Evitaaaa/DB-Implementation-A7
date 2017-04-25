@@ -15,6 +15,7 @@ A7/Build/customer.tbl
 
 *.o
 
+<<<<<<< Updated upstream
 *.json
 
 *.bin

@@ -94,7 +94,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 13 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
+#line 13 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.y"
 {
 	struct SQLStatement *myStatement;
 	struct SFWQuery *mySelectQuery;
@@ -109,7 +109,7 @@ typedef union YYSTYPE
 	double myDouble;
 }
 /* Line 1529 of yacc.c.  */
-#line 113 "/Users/xiangjinzou/Comp530/DB-Implementation-A7/A7/Main/SQL/source/Parser.h"
+#line 113 "/Users/Evita/Desktop/Evita/subjects/COMP530 Database Impl/codes/A7_githubLocal/DB-Implementation-A7/A7/Main/SQL/source/Parser.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
