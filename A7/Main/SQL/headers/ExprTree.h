@@ -23,7 +23,7 @@ class ExprTree {
 
 public:
 	virtual string toString () = 0;
-	virtual pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName) = 0;
+	virtual vector<pair<string, MyDB_AttTypePtr>> getAttPairs (MyDB_CatalogPtr catalog, string tbName) = 0;
 	virtual MyDB_ExprType getType() = 0;
 	virtual MyDB_ExprAttType getAttType() = 0;
 	virtual ~ExprTree () {}
@@ -55,8 +55,10 @@ public:
 		return MyDB_ExprAttType :: boolAtt;
 	}
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs (MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		res.push_back(make_pair(toString(), make_shared <MyDB_BoolAttType> ()));
+		return res;
 	}
 
 };
@@ -80,11 +82,14 @@ public:
 	}
 
 	MyDB_ExprAttType getAttType() {
+		//cout << "[ExprTree line 83] return doubleAtt \n";
 		return MyDB_ExprAttType :: doubleAtt;
 	}		
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_DoubleAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs (MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		res.push_back(make_pair(toString(), make_shared <MyDB_DoubleAttType> ()));
+		return res;
 	}
 
 	~DoubleLiteral () {}
@@ -110,11 +115,14 @@ public:
 	}
 
 	MyDB_ExprAttType getAttType() {
+		//cout << "[ExprTree line 118] return intAtt \n";
 		return MyDB_ExprAttType :: intAtt;
 	}
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_IntAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs (MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		res.push_back(make_pair(toString(), make_shared <MyDB_IntAttType> ()));
+		return res;
 	}
 
 	~IntLiteral () {}
@@ -143,9 +151,10 @@ public:
 		return MyDB_ExprAttType :: stringAtt;
 	}
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		cout <<"[ExprTree 147] getAttPair for string \n"; 
-		return make_pair("", make_shared <MyDB_StringAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs (MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		res.push_back(make_pair(toString(), make_shared <MyDB_StringAttType> ()));
+		return res;
 	}
 
 	~StringLiteral () {}
@@ -177,7 +186,7 @@ public:
 		return attType2;
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName) override {
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs (MyDB_CatalogPtr catalog, string tbName) override {
 		string type;
         string attr_name = tbName + "." + attName + ".type";
 		
@@ -201,7 +210,11 @@ public:
 				attType2 = MyDB_ExprAttType::stringAtt;
 			}
 		}
-		return make_pair("[" + attName + "]", attType);
+
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		res.push_back(make_pair("[" + attName + "]", attType));
+		return res;
+
 	}
 
 	~Identifier () {}
@@ -237,8 +250,17 @@ public:
 		}
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> lvec = lhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> rvec = rhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		for(auto l : lvec){
+			res.push_back(l);
+		}
+		for(auto r : rvec){
+			res.push_back(r);
+		}
+		return res;
 	}
 
 	~MinusOp () {}
@@ -279,17 +301,17 @@ public:
 		}
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		if(getAttType() == MyDB_ExprAttType::stringAtt){
-			return make_pair("", make_shared <MyDB_StringAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> lvec = lhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> rvec = rhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		for(auto l : lvec){
+			res.push_back(l);
 		}
-		else if(getAttType() == MyDB_ExprAttType::doubleAtt){
-			return make_pair("", make_shared <MyDB_DoubleAttType> ());
+		for(auto r : rvec){
+			res.push_back(r);
 		}
-		else{
-			return make_pair("", make_shared <MyDB_IntAttType> ());
-		}
-		
+		return res;
 	}
 
 	~PlusOp () {}
@@ -326,8 +348,17 @@ public:
 		}
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> lvec = lhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> rvec = rhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		for(auto l : lvec){
+			res.push_back(l);
+		}
+		for(auto r : rvec){
+			res.push_back(r);
+		}
+		return res;
 	}
 
 	~TimesOp () {}
@@ -356,17 +387,21 @@ public:
 	}
 
 	MyDB_ExprAttType getAttType() {
-		if(lhs->getAttType() == MyDB_ExprAttType::doubleAtt || rhs->getAttType() == MyDB_ExprAttType::doubleAtt){
-			return MyDB_ExprAttType::doubleAtt;
-		}
-		else{
-			return MyDB_ExprAttType::intAtt;
-		}
+		return MyDB_ExprAttType::doubleAtt;
+
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> lvec = lhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> rvec = rhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		for(auto l : lvec){
+			res.push_back(l);
+		}
+		for(auto r : rvec){
+			res.push_back(r);
+		}
+		return res;
 	}
 
 	~DivideOp () {}
@@ -398,8 +433,17 @@ public:
 		return MyDB_ExprAttType :: boolAtt;
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> lvec = lhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> rvec = rhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		for(auto l : lvec){
+			res.push_back(l);
+		}
+		for(auto r : rvec){
+			res.push_back(r);
+		}
+		return res;
 	}
 
 	~GtOp () {}
@@ -431,8 +475,17 @@ public:
 		return MyDB_ExprAttType :: boolAtt;
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> lvec = lhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> rvec = rhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		for(auto l : lvec){
+			res.push_back(l);
+		}
+		for(auto r : rvec){
+			res.push_back(r);
+		}
+		return res;
 	}
 
 	~LtOp () {}
@@ -464,8 +517,17 @@ public:
 		return MyDB_ExprAttType :: boolAtt;
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> lvec = lhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> rvec = rhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		for(auto l : lvec){
+			res.push_back(l);
+		}
+		for(auto r : rvec){
+			res.push_back(r);
+		}
+		return res;
 	}
 
 	~NeqOp () {}
@@ -497,8 +559,17 @@ public:
 		return MyDB_ExprAttType :: boolAtt;
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> lvec = lhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> rvec = rhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		for(auto l : lvec){
+			res.push_back(l);
+		}
+		for(auto r : rvec){
+			res.push_back(r);
+		}
+		return res;
 	}
 
 	~OrOp () {}
@@ -530,8 +601,17 @@ public:
 		return MyDB_ExprAttType :: boolAtt;
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		vector<pair<string, MyDB_AttTypePtr>> lvec = lhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> rvec = rhs -> getAttPairs(catalog, tbName);
+		vector<pair<string, MyDB_AttTypePtr>> res;
+		for(auto l : lvec){
+			res.push_back(l);
+		}
+		for(auto r : rvec){
+			res.push_back(r);
+		}
+		return res;
 	}
 
 	~EqOp () {}
@@ -561,8 +641,8 @@ public:
 		return MyDB_ExprAttType :: boolAtt;
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		return child -> getAttPairs(catalog, tbName);
 	}
 
 	~NotOp () {}
@@ -592,14 +672,8 @@ public:
 		return child->getAttType();
 	}	
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		if(getAttType() == MyDB_ExprAttType::doubleAtt){
-			return make_pair("sum", make_shared <MyDB_DoubleAttType> ());
-		}
-		else{
-			return make_pair("sum", make_shared <MyDB_IntAttType> ());
-		}
-		
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		return child -> getAttPairs(catalog, tbName);
 	}
 
 	~SumOp () {}
@@ -630,16 +704,8 @@ public:
 	}	
 
 
-	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		cout << "[ExprTree line 620] call getAttPair \n";
-		if(getAttType() == MyDB_ExprAttType::doubleAtt){
-			cout << "[ExprTree line 620] return double \n";
-			return make_pair("avg", make_shared <MyDB_DoubleAttType> ());
-		}
-		else{
-			cout << "[ExprTree line 620] return int \n";
-			return make_pair("avg", make_shared <MyDB_IntAttType> ());
-		}
+	vector<pair<string, MyDB_AttTypePtr>> getAttPairs(MyDB_CatalogPtr catalog, string tbName){
+		return child -> getAttPairs(catalog, tbName);
 	}
 
 	~AvgOp () {}
