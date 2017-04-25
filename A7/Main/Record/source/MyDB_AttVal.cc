@@ -143,7 +143,7 @@ string MyDB_DoubleAttVal :: toString () {
 }
 
 bool MyDB_DoubleAttVal :: toBool () {
-	cout << "Oops!  Can't convert int to bool";
+	cout << "Oops!  Can't convert double to bool";
 	exit (1);
 }
 
@@ -201,7 +201,7 @@ string MyDB_StringAttVal :: toString () {
 }
 
 bool MyDB_StringAttVal :: toBool () {
-        cout << "Oops!  Can't convert int to bool";
+        cout << "Oops!  Can't convert string to bool";
         exit (1);
 }
 

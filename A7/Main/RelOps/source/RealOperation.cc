@@ -38,17 +38,18 @@ void RealOperation :: run() {
     vector <pair <MyDB_AggType, string>> aggsToCompute;
     vector <string> groupings;
     for (auto v : valuesToSelect){
-        cout << v->toString() << "\n";
+        cout <<"[RealOperation line 41] " << v->toString() << "\n";
+        
         mySchemaOut->appendAtt(v->getAttPair(catalog, fullTableName));
         projections.push_back(v->toString());
 
         if(v->getType() == MyDB_ExprType::sumExpr){
             isAgg = true;
-            aggsToCompute.push_back(make_pair(MyDB_AggType::sumAgg, v->toString()));
+            aggsToCompute.push_back(make_pair(MyDB_AggType::sumAgg, v->toString().substr(3)));
         }
         else if(v->getType() == MyDB_ExprType::avgExpr){
             isAgg = true;
-            aggsToCompute.push_back(make_pair(MyDB_AggType::avgAgg, v->toString()));
+            aggsToCompute.push_back(make_pair(MyDB_AggType::avgAgg, v->toString().substr(3)));
         }
         else{
             groupings.push_back(v->toString());
@@ -77,7 +78,7 @@ void RealOperation :: run() {
 		vector <string> groupings, string selectionPredicate);
     */
     if(isAgg){
-        cout << "do aggregate \n";
+        cout << "[RealOperation line 81] do aggregate \n";
         Aggregate selectionOp (inputTableReaderWriter, outputTableReadWriter, aggsToCompute, groupings, selectPredicate);
         selectionOp.run();
     }

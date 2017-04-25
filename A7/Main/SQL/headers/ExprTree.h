@@ -144,6 +144,7 @@ public:
 	}
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		cout <<"[ExprTree 147] getAttPair for string \n"; 
 		return make_pair("", make_shared <MyDB_StringAttType> ());
 	}
 
@@ -266,6 +267,10 @@ public:
 	}
 
 	MyDB_ExprAttType getAttType() {
+		if(lhs->getAttType() == MyDB_ExprAttType::stringAtt){
+			return MyDB_ExprAttType ::stringAtt;
+		}
+
 		if(lhs->getAttType() == MyDB_ExprAttType::doubleAtt || rhs->getAttType() == MyDB_ExprAttType::doubleAtt){
 			return MyDB_ExprAttType::doubleAtt;
 		}
@@ -275,7 +280,16 @@ public:
 	}	
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
-		return make_pair("", make_shared <MyDB_BoolAttType> ());
+		if(getAttType() == MyDB_ExprAttType::stringAtt){
+			return make_pair("", make_shared <MyDB_StringAttType> ());
+		}
+		else if(getAttType() == MyDB_ExprAttType::doubleAtt){
+			return make_pair("", make_shared <MyDB_DoubleAttType> ());
+		}
+		else{
+			return make_pair("", make_shared <MyDB_IntAttType> ());
+		}
+		
 	}
 
 	~PlusOp () {}
@@ -617,10 +631,13 @@ public:
 
 
 	pair<string, MyDB_AttTypePtr> getAttPair (MyDB_CatalogPtr catalog, string tbName){
+		cout << "[ExprTree line 620] call getAttPair \n";
 		if(getAttType() == MyDB_ExprAttType::doubleAtt){
+			cout << "[ExprTree line 620] return double \n";
 			return make_pair("avg", make_shared <MyDB_DoubleAttType> ());
 		}
 		else{
+			cout << "[ExprTree line 620] return int \n";
 			return make_pair("avg", make_shared <MyDB_IntAttType> ());
 		}
 	}

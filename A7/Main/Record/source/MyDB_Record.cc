@@ -95,15 +95,15 @@ pair <func, MyDB_AttTypePtr> MyDB_Record :: compileHelper(char * &vals) {
 			vals = findsymbol ('(', vals);
 
 			// find the left result
-			cout << "+ condition \n";
-			cout << "lres " << vals << "\n";
+			//cout << "+ condition \n";
+			//cout << "lres " << vals << "\n";
 			auto lres = compileHelper (vals);
-			cout << "lres " << lres.first() -> toInt() << "\n";
+			//cout << "lres " << lres.first() -> toInt() << "\n";
 			// and the comma
 			vals = findsymbol (',', vals);
 
 			// find the right result
-			cout << " rres " << vals << "\n";
+			//cout << " rres " << vals << "\n";
 			auto rres = compileHelper (vals);
 			
 			// find the r-paren
@@ -224,17 +224,17 @@ pair <func, MyDB_AttTypePtr> MyDB_Record :: compileHelper(char * &vals) {
 			vals = findsymbol ('(', vals);
 
 			// find the left result
-			cout << " lres " << vals << "\n";
+			//cout << " lres " << vals << "\n";
 			auto lres = compileHelper (vals);
-			cout << " ltype " << lres.second -> toString() << "\n";
+			//cout << " ltype " << lres.second -> toString() << "\n";
 
 			// and the comma
 			vals = findsymbol (',', vals);
 
 			// find the right result
-			cout << " rres " << vals << "\n";
+			//cout << " rres " << vals << "\n";
 			auto rres = compileHelper (vals);
-			cout << " rtype " << rres.second -> toString() << "\n";
+			//cout << " rtype " << rres.second -> toString() << "\n";
 			// find the r-paren
 			vals = findsymbol (')', vals);
 			
@@ -316,17 +316,17 @@ pair <func, MyDB_AttTypePtr> MyDB_Record :: compileHelper(char * &vals) {
 			vals = findsymbol (']', vals);
 	
 			// and get that attribute
-			cout << "name " << name << "\n";
+			//cout << "name " << name << "\n";
 			pair <func, MyDB_AttTypePtr> MyDB_Record = fromData (name);
-			cout << MyDB_Record.second ->toString() << "\n";
+			//cout << MyDB_Record.second ->toString() << "\n";
 			return fromData (name);		
 
 		} else if (strncmp (vals, "int", 3) == 0) {
 
 			vals = findsymbol ('[', vals);
-			cout << "int condition \n";
+			//cout << "int condition \n";
 			int val = stoi (vals);
-			cout << "val " << val << "\n";
+			//cout << "val " << val << "\n";
 			vals = findsymbol (']', vals);
 
 			// remember this value
@@ -409,9 +409,9 @@ pair <func, MyDB_AttTypePtr> MyDB_Record :: fromData (string attName) {
 
 pair <func, MyDB_AttTypePtr> MyDB_Record :: plus (pair <func, MyDB_AttTypePtr> lhs, pair <func, MyDB_AttTypePtr> rhs) {
 
-	cout << "in plus \n";
-	cout << "lhs " << lhs.first()->toInt() << "\n";
-	cout << "rhs " << rhs.first()->toInt() << "\n";
+	//cout << "in plus \n";
+	//cout << "lhs " << lhs.first()->toInt() << "\n";
+	//cout << "rhs " << rhs.first()->toInt() << "\n";
 	// if both sides can be cast upwards to be ints, then do so
 	if (lhs.second->promotableToInt () && rhs.second->promotableToInt ()) {
 		MyDB_IntAttValPtr temp = make_shared <MyDB_IntAttVal> ();
