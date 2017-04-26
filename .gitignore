@@ -19,3 +19,13 @@ A7/Build/customer.tbl
 *.json
 
 *.bin
+
+A7/Build/catFile
+
+A7/Build/tempFile
+
+A7/Main/SQL/source/Lexer.c
+
+A7/Main/SQL/source/Parser.c
+
+A7/Main/SQL/source/Parser.h

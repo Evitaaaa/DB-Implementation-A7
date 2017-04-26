@@ -6,6 +6,7 @@
 #include "RegularSelection.h"
 #include "Aggregate.h"
 #include "RealOperation.h"
+#include "ScanJoin.h"
 
 
 RealOperation :: RealOperation(SQLStatement *inputSql, MyDB_CatalogPtr inputCatalog, 
@@ -19,35 +20,94 @@ RealOperation :: RealOperation(SQLStatement *inputSql, MyDB_CatalogPtr inputCata
 void RealOperation :: joinTwoTable(){
     SFWQuery query = sql->getQuery();
     vector <pair <string, string>> tablesToProcess = query.getTables();
-    string leftTbName = tablesToProcess[0].first;
-    string rightTbName = tablesToProcess[1].first;
+    string leftTbName = tablesToProcess[1].first;
+    string rightTbName = tablesToProcess[0].first;
+    string leftAlias = tablesToProcess[1].second;
+    string rightAlias = tablesToProcess[0].second;
+    cout << "left table: " << leftTbName << "\n";
+    cout << "right table: " << rightTbName << "\n";
+
     MyDB_TableReaderWriterPtr leftTableReaderWriter = allTables[leftTbName];
     MyDB_TableReaderWriterPtr rightTableReaderWriter = allTables[rightTbName];
     leftTableReaderWriter->loadFromTextFile("./"+leftTbName+".tbl");
     rightTableReaderWriter->loadFromTextFile("./"+rightTbName+".tbl");
 
     MyDB_SchemaPtr mySchemaOut = make_shared <MyDB_Schema> ();
+    vector <string> projections;
     MyDB_SchemaPtr leftSchema = leftTableReaderWriter->getTable()->getSchema();
     vector <pair <string, MyDB_AttTypePtr>> leftAtts = leftSchema -> getAtts();
-    for (auto p : leftAtts){
+    for (auto &p : leftAtts){
         mySchemaOut->appendAtt(p);
+        projections.push_back("["+p.first+"]");
     }
     MyDB_SchemaPtr rightSchema = rightTableReaderWriter->getTable()->getSchema();
     vector <pair <string, MyDB_AttTypePtr>> rightAtts = rightSchema -> getAtts();
-    for (auto p : rightAtts){
+    for (auto &p : rightAtts){
         mySchemaOut->appendAtt(p);
+        projections.push_back("["+p.first+"]");
     }
 
     MyDB_TablePtr myTableOut = make_shared <MyDB_Table> ("tableOut", "tableOut.bin", mySchemaOut);
     MyDB_TableReaderWriterPtr outputTableReadWriter = make_shared <MyDB_TableReaderWriter> (myTableOut, bufferMgr);
 
-    vector <ExprTreePtr> valuesToSelect = query.getAllValues();
-    vector <string> projections;
+    vector <ExprTreePtr> allDisjunctions = query.getAllDisjunctions();
+    vector <pair <string, string>> hashAtts;
+    vector <string> finalPredicates;
+    vector <string> leftPredicates;
+    vector <string> rightPredicates;
+
+    for (auto v : allDisjunctions){
+        pair<bool, string> isJoinPair = v->IsJoinPredicate();
+        if (isJoinPair.first){
+            string delimiter = "|";
+            string atts = isJoinPair.second;
+            int pos = atts.find(delimiter);
+            string leftAtt = atts.substr(0, pos);
+            string rightAtt = atts.substr(pos+1, atts.size()-pos-1);
+            finalPredicates.push_back(v->toString());
+            hashAtts.push_back(make_pair(leftAtt, rightAtt));
+            cout << v->toString() << "\n";
+            cout << "atts: " << atts << "\n";
+            cout << "left att: " << leftAtt << "\n";
+            cout << "right att: " << rightAtt << "\n";
+        }
+        else{
+            if (isJoinPair.second == leftAlias){
+                leftPredicates.push_back(v->toString());
+            }
+            else{
+                rightPredicates.push_back(v->toString());
+            }
+
+        }
+    }
+
+    string finalSelectionPredicate = parseStringPredicate(finalPredicates);
+    string leftSelectionPredicate = parseStringPredicate(leftPredicates);
+    string rightSelectionPredicate = parseStringPredicate(rightPredicates);
+    cout << "final sel: " << finalSelectionPredicate << "\n";
+    cout << "left sel: " << leftSelectionPredicate << "\n";
+    cout << "right sel: " << rightSelectionPredicate << "\n";
 
 
+    ScanJoin myOp (leftTableReaderWriter, rightTableReaderWriter, outputTableReadWriter,
+                    finalSelectionPredicate, projections, hashAtts, leftSelectionPredicate, rightSelectionPredicate);
+    myOp.run();
 
+    MyDB_RecordPtr temp = outputTableReadWriter->getEmptyRecord ();
+    MyDB_RecordIteratorAltPtr myIter = outputTableReadWriter->getIteratorAlt ();
 
-
+    int counter = 0;
+    int limit = 1;
+    while (myIter->advance ()) {
+            myIter->getCurrent (temp);
+            if (limit > 0){
+                cout << temp << "\n";
+            }
+            limit--;
+            counter++;
+    }
+    cout << "Total " << counter << " records found. \n";
 
 }
 
@@ -57,6 +117,13 @@ void RealOperation :: run() {
     // tablesToProcess<tableName, alias>
     vector <pair <string, string>> tablesToProcess = query.getTables();
     
+
+    if (tablesToProcess.size() == 2){
+        joinTwoTable();
+        return;
+    }
+
+
     // STEP 1 set input table
     //TODO should be a vector of tables
     /*

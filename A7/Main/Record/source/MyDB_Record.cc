@@ -135,21 +135,22 @@ pair <func, MyDB_AttTypePtr> MyDB_Record :: compileHelper(char * &vals) {
 
 		// equals
 		} else if (vals[0] == '=' && vals[1] == '=') {
-
+			
 			// find the l-paren
 			vals = findsymbol ('(', vals);
-
+			
 			// find the left result
 			auto lres = compileHelper (vals);
 			
 			// and the comma
 			vals = findsymbol (',', vals);
-
+			
 			// find the right result
 			auto rres = compileHelper (vals);
 			
 			// find the r-paren
 			vals = findsymbol (')', vals);
+			
 			
 			// outta here!
 			return eq (lres, rres);

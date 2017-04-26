@@ -447,7 +447,7 @@ public:
 			return make_pair(false, left.second);
 		}
 		else{
-			return make_pair(true, "");
+			return make_pair(true, lhs->toString() + "|" + rhs->toString());
 		}
 	}
 
@@ -491,7 +491,7 @@ public:
 			return make_pair(false, left.second);
 		}
 		else{
-			return make_pair(true, "");
+			return make_pair(true, lhs->toString() + "|" + rhs->toString());
 		}
 	}
 
@@ -535,7 +535,7 @@ public:
 			return make_pair(false, left.second);
 		}
 		else{
-			return make_pair(true, "");
+			return make_pair(true, lhs->toString() + "|" + rhs->toString());
 		}
 	}
 
@@ -616,7 +616,7 @@ public:
 			return make_pair(false, left.second);
 		}
 		else{
-			return make_pair(true, "");
+			return make_pair(true, lhs->toString() + "|" + rhs->toString());
 		}
 	}
 
