@@ -17,7 +17,7 @@ RealOperation :: RealOperation(SQLStatement *inputSql, MyDB_CatalogPtr inputCata
             bufferMgr = inputMgr;
 }
 
-void RealOperation :: joinTwoTable(){
+MyDB_TableReaderWriterPtr RealOperation :: joinTwoTable(){
     SFWQuery query = sql->getQuery();
     vector <pair <string, string>> tablesToProcess = query.getTables();
     string leftTbName = tablesToProcess[1].first;
@@ -93,10 +93,11 @@ void RealOperation :: joinTwoTable(){
     ScanJoin myOp (leftTableReaderWriter, rightTableReaderWriter, outputTableReadWriter,
                     finalSelectionPredicate, projections, hashAtts, leftSelectionPredicate, rightSelectionPredicate);
     myOp.run();
+    return outputTableReadWriter;
 
     MyDB_RecordPtr temp = outputTableReadWriter->getEmptyRecord ();
     MyDB_RecordIteratorAltPtr myIter = outputTableReadWriter->getIteratorAlt ();
-
+/*
     int counter = 0;
     int limit = 1;
     while (myIter->advance ()) {
@@ -108,6 +109,7 @@ void RealOperation :: joinTwoTable(){
             counter++;
     }
     cout << "Total " << counter << " records found. \n";
+    */
 
 }
 
@@ -118,10 +120,7 @@ void RealOperation :: run() {
     vector <pair <string, string>> tablesToProcess = query.getTables();
     
 
-    if (tablesToProcess.size() == 2){
-        joinTwoTable();
-        return;
-    }
+    
 
 
     // STEP 1 set input table
@@ -130,8 +129,15 @@ void RealOperation :: run() {
 
     */
     string fullTableName = tablesToProcess.front().first;
-    MyDB_TableReaderWriterPtr inputTableReaderWriter = allTables[fullTableName];
-    inputTableReaderWriter->loadFromTextFile("./" + fullTableName + ".tbl");
+    MyDB_TableReaderWriterPtr inputTableReaderWriter  = nullptr;
+    if (tablesToProcess.size() == 2){
+        inputTableReaderWriter = joinTwoTable();
+    }
+    else{
+        inputTableReaderWriter = allTables[fullTableName];
+        inputTableReaderWriter->loadFromTextFile("./" + fullTableName + ".tbl");
+    }
+
     
     // STEP 2 set output table 
     MyDB_SchemaPtr mySchemaOut = make_shared <MyDB_Schema> ();

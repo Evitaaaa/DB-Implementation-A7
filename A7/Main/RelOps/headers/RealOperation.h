@@ -19,5 +19,5 @@ private:
     MyDB_BufferManagerPtr bufferMgr;
 
     string parseStringPredicate(vector<string> allPredicates);
-    void joinTwoTable();
+    MyDB_TableReaderWriterPtr joinTwoTable();
 };
