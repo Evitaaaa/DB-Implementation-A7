@@ -24,8 +24,7 @@ MyDB_TableReaderWriterPtr RealOperation :: joinTwoTable(){
     string rightTbName = tablesToProcess[0].first;
     string leftAlias = tablesToProcess[1].second;
     string rightAlias = tablesToProcess[0].second;
-    cout << "left table: " << leftTbName << "\n";
-    cout << "right table: " << rightTbName << "\n";
+    
 
     MyDB_TableReaderWriterPtr leftTableReaderWriter = allTables[leftTbName];
     MyDB_TableReaderWriterPtr rightTableReaderWriter = allTables[rightTbName];
@@ -66,10 +65,7 @@ MyDB_TableReaderWriterPtr RealOperation :: joinTwoTable(){
             string rightAtt = atts.substr(pos+1, atts.size()-pos-1);
             finalPredicates.push_back(v->toString());
             hashAtts.push_back(make_pair(leftAtt, rightAtt));
-            cout << v->toString() << "\n";
-            cout << "atts: " << atts << "\n";
-            cout << "left att: " << leftAtt << "\n";
-            cout << "right att: " << rightAtt << "\n";
+            
         }
         else{
             if (isJoinPair.second == leftAlias){
@@ -85,9 +81,7 @@ MyDB_TableReaderWriterPtr RealOperation :: joinTwoTable(){
     string finalSelectionPredicate = parseStringPredicate(finalPredicates);
     string leftSelectionPredicate = parseStringPredicate(leftPredicates);
     string rightSelectionPredicate = parseStringPredicate(rightPredicates);
-    cout << "final sel: " << finalSelectionPredicate << "\n";
-    cout << "left sel: " << leftSelectionPredicate << "\n";
-    cout << "right sel: " << rightSelectionPredicate << "\n";
+    
 
 
     ScanJoin myOp (leftTableReaderWriter, rightTableReaderWriter, outputTableReadWriter,
@@ -97,19 +91,6 @@ MyDB_TableReaderWriterPtr RealOperation :: joinTwoTable(){
 
     MyDB_RecordPtr temp = outputTableReadWriter->getEmptyRecord ();
     MyDB_RecordIteratorAltPtr myIter = outputTableReadWriter->getIteratorAlt ();
-/*
-    int counter = 0;
-    int limit = 1;
-    while (myIter->advance ()) {
-            myIter->getCurrent (temp);
-            if (limit > 0){
-                cout << temp << "\n";
-            }
-            limit--;
-            counter++;
-    }
-    cout << "Total " << counter << " records found. \n";
-    */
 
 }
 
